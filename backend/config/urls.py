@@ -13,7 +13,7 @@ schema_view = get_schema_view(
    openapi.Info(
       title="NovaX Note",
       default_version='v1',
-      description="Test description",
+      description="Note API",
       terms_of_service="https://www.google.com/policies/terms/",
       contact=openapi.Contact(email="contact@snippets.local"),
       license=openapi.License(name="BSD License"),
@@ -24,10 +24,11 @@ schema_view = get_schema_view(
 
 urlpatterns = [
    path("admin/", admin.site.urls),
-   path('docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+   path('', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 ]
 
 urlpatterns += [path("notes/", include("notes.urls"))]
+urlpatterns += [path("user/", include("user.urls"))]
